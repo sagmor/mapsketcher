@@ -2,8 +2,11 @@
 %html
   %head>
     %title MapSketcher
-    = stylesheet_link_tag :all
     = javascript_include_tag :defaults, :all
     = csrf_meta_tag
+    = stylesheet_link_tag 'compiled/landscape.css', :media => 'screen and (orientation:landscape)'
+    = stylesheet_link_tag 'compiled/portrait.css', :media => 'screen and (orientation:portrait)'
+    = stylesheet_link_tag 'compiled/handheld.css', :media => 'handheld'
 
-  %body= yield
+  %body
+    #wrapper= yield
