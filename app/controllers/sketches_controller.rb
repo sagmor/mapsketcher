@@ -18,8 +18,6 @@ class SketchesController < ApplicationController
     @sketch = Sketch.create(params[:sketch])
     respond_with @sketch
   end
-  
-  end
 
   # DELETE /sketches/:id(.:format)
   def destroy

@@ -59,6 +59,11 @@ a img {
 }
 
 /* line 3, ../../../app/stylesheets/partials/main.sass */
+body, img {
+  -webkit-user-select: none;
+}
+
+/* line 6, ../../../app/stylesheets/partials/main.sass */
 #wrapper {
   position: absolute;
   top: 0px;
@@ -67,26 +72,32 @@ a img {
   height: 100%;
 }
 
-/* line 10, ../../../app/stylesheets/partials/main.sass */
+/* line 13, ../../../app/stylesheets/partials/main.sass */
+#canvas {
+  z-index: 1000;
+  position: absolute;
+}
+
+/* line 17, ../../../app/stylesheets/partials/main.sass */
 #map {
   position: absolute;
   background-color: #333333;
 }
 
-/* line 14, ../../../app/stylesheets/partials/main.sass */
+/* line 21, ../../../app/stylesheets/partials/main.sass */
 #minimap {
   position: absolute;
   background-color: #666666;
 }
 
-/* line 18, ../../../app/stylesheets/partials/main.sass */
+/* line 25, ../../../app/stylesheets/partials/main.sass */
 #objects {
   position: absolute;
   background-color: #888888;
 }
 
 /* line 3, ../../../app/stylesheets/handheld.sass */
-#map {
+#map, #canvas {
   top: 0;
   left: 0;
   right: 0;
