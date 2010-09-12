@@ -1,6 +1,6 @@
 var Objects = (function(){
   var Objects = function(selector) {
-    this.objects = [];
+    this.sketches = {};
   }
   
   Objects.prototype.setMap = setProperty('map');
@@ -19,11 +19,20 @@ var Objects = (function(){
   }
 
   Objects.prototype.add = function(sketch) {
-    this.objects.push(sketch);
+    if (this.sketches[sketch._id]) return;
+    
+    this.sketches[sketch._id] = sketch;
     this.map.draw(sketch);
     this.minimap.draw(sketch);
   }
   
+  Objects.prototype.remove = function(sketch) {
+    if (!this.sketches[sketch._id]) return;
+    
+    this.sketches[sketch._id] = null;
+    this.map.undraw(sketch);
+    this.minimap.undraw(sketch);
+  }
   
   return Objects;
 })();

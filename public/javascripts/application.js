@@ -9,4 +9,10 @@ $(document).ready(function() {
   objects.setMinimap( new Minimap( "#minimap", objects.getMap() ));
 
   objects.start();
+  
+  var server = new Server(PUSHER_KEY);
+  server.objects = objects;
+  server.map = objects.map;
+  
+  server.start();
 });

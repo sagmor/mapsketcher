@@ -4,6 +4,7 @@ gem 'rails', '3.0.0'
 
 gem 'haml'
 gem 'compass'
+gem 'pusher'
 
 gem 'bson', '1.0.4'
 gem 'bson_ext', '1.0.4'

@@ -3,6 +3,7 @@ var Minimap = (function(){
   var Minimap = function(selector, map) {
     this.selector = selector;
     this.map = map;
+    this.polylines = {};
     
     var dom = $(selector);
     
@@ -28,8 +29,16 @@ var Minimap = (function(){
   
   Minimap.prototype.draw = function(sketch) {
     var polyline = sketch.polyline();
+    this.polylines[sketch._id] = polyline;
     polyline.setMap(this.minimap);
   }
+  
+  Minimap.prototype.undraw = function(sketch) {
+    if (this.polylines[sketch._id]) {
+      this.polylines[sketch._id] = null;
+    }
+  }
+  
   
   return Minimap;
 })();

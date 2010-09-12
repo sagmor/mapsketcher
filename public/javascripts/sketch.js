@@ -5,10 +5,15 @@ var Sketch = (function(){
       this.points = data.points || [];
       this.latitude = data.latitude;
       this.longitude = data.longitude;
+      this.new_record = false;
     } else {
+      this._id = '' + new Date().getTime();
       this.points = [];
+      this.new_record = true;
     }
   }
+  
+  Sketch.prototype.id = getProperty('_id');
   
   Sketch.prototype.append = function(latitude, longitude) {
     this.points.push({
@@ -19,7 +24,7 @@ var Sketch = (function(){
   }
   
   Sketch.prototype.save = function(objects) {
-    if (this.points.length < 2) return;
+    if (!this.new_record || this.points.length < 2) return;
     
     objects.add(this);
     
@@ -32,8 +37,10 @@ var Sketch = (function(){
       },
       type: 'POST',
       success: function(data) {
-        console.log(data);
-        // TODO
+        objects.remove(this);
+        
+        var saved_sketch = new Sketch(data);
+        objects.add(saved_sketch);
       }
     }); 
   }

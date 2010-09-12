@@ -4,6 +4,7 @@ var Map = (function(){
     this.objects = objects;
     this.canvas = null;
     this.mode = 'drag'
+    this.polylines = {};
 
     this.map = new google.maps.Map($(selector)[0], {
       zoom: 16,
@@ -64,7 +65,14 @@ var Map = (function(){
   
   Map.prototype.draw = function(sketch) {
     var polyline = sketch.polyline();
+    this.polylines[sketch._id] = polyline;
     polyline.setMap(this.map);
+  }
+  
+  Map.prototype.undraw = function(sketch) {
+    if (this.polylines[sketch._id]) {
+      this.polylines[sketch._id] = null;
+    }
   }
   
   return Map;
