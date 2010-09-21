@@ -19,17 +19,17 @@ var Objects = (function(){
   }
 
   Objects.prototype.add = function(sketch) {
-    if (this.sketches[sketch._id]) return;
+    if (this.sketches[sketch.id]) return;
     
-    this.sketches[sketch._id] = sketch;
+    this.sketches[sketch.id] = sketch;
     this.map.draw(sketch);
     this.minimap.draw(sketch);
   }
   
   Objects.prototype.remove = function(sketch) {
-    if (!this.sketches[sketch._id]) return;
+    if (!this.sketches[sketch.id]) return;
     
-    this.sketches[sketch._id] = null;
+    this.sketches[sketch.id] = null;
     this.map.undraw(sketch);
     this.minimap.undraw(sketch);
   }

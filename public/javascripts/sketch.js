@@ -1,19 +1,19 @@
 var Sketch = (function(){
   var Sketch = function(data) {
     if (data) {
-      this._id = data._id;
+      this.id = data.id;
       this.points = data.points || [];
       this.latitude = data.latitude;
       this.longitude = data.longitude;
       this.new_record = false;
     } else {
-      this._id = '' + new Date().getTime();
+      this.id = '' + new Date().getTime();
       this.points = [];
       this.new_record = true;
     }
   }
   
-  Sketch.prototype.id = getProperty('_id');
+  Sketch.prototype.id = getProperty('id');
   
   Sketch.prototype.append = function(latitude, longitude) {
     this.points.push({

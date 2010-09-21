@@ -4,6 +4,8 @@ class Point
   field :position, :type => Integer
   field :latitude, :type => Float
   field :longitude, :type => Float
+
+  scope :ordered, order_by('position asc')
   
   embedded_in :sketch, :inverse_of => :points
 
