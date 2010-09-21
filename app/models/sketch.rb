@@ -14,7 +14,8 @@ class Sketch
       :id => id,
       :latitude => latitude,
       :longitude => longitude,
-      :points => points.ordered
+      # This is ineficient but works for now.
+      :points => points.sort_by(&:position)
     }
   end
   
