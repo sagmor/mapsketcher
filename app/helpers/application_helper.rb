@@ -3,7 +3,7 @@ module ApplicationHelper
     id ||= ENV['GOOGLE_ANALYTICS_ACCOUNT']
 
     return '' if id.nil?
-    return <<EOC
+    return <<EOC.html_safe
 <script type="text/javascript">
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', '#{id}']);
