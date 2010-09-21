@@ -46,7 +46,7 @@ var Sketch = (function(){
   }
   
   Sketch.prototype.polyline = function() {
-    var ordered_points = _.sortBy(this.points, getProperty('position'))
+    var ordered_points = this.points;
     var path = _.map(ordered_points, function(x) { 
       return new google.maps.LatLng(x.latitude, x.longitude)
     });

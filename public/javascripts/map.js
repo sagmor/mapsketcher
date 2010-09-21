@@ -42,6 +42,10 @@ var Map = (function(){
   
   Map.prototype.isDrawing = getProperty('drawing');
   
+  Map.prototype.go_to = function(pos) {
+    this.map.panTo(new google.maps.LatLng(pos.latitude,pos.longitude));
+  }
+  
   Map.prototype.switchMode = function() {
     this.mode = (this.mode == 'drag' ? 'draw' : 'drag' );
     

@@ -12,7 +12,11 @@ var Server = (function(){
     this.pusher.bind('create', function(data) {
       var sketch = new Sketch(data);
       server.objects.add(sketch);
-    })
+    });
+    
+    this.pusher.bind('go_to', function(data) {
+      server.map.go_to(data);
+    });
   }
   
   return Server;

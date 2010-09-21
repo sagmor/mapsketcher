@@ -19,12 +19,25 @@ var Minimap = (function(){
     google.maps.event.addListener(this.map.map, 'center_changed', function() {
       minimap.panTo(this.getCenter());
     });
+
+    google.maps.event.addListener(this.minimap, 'dblclick', this.onDblclick);
     
     setTimeout(function() {
       dom.children().children().each(function() {
         if ( $('a[target="_blank"]', this).length ) $(this).detach();
        });
     }, 1000);
+  }
+
+  Minimap.prototype.onDblclick = function(event) {
+    jQuery.ajax({
+      url: '/go_to',
+      data: {
+        latitude: event.latLng.lat(),
+        longitude: event.latLng.lng()
+      },
+      type: 'POST'
+    });
   }
   
   Minimap.prototype.draw = function(sketch) {

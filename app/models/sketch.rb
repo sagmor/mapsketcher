@@ -11,6 +11,9 @@ class Sketch
   
   protected
     def calculate_center
-      
+      return if points.length.zero?
+
+      self.latitude = points.collect(&:latitude).sum / points.length
+      self.longitude = points.collect(&:longitude).sum / points.length
     end
 end
