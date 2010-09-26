@@ -1,26 +1,36 @@
 MapSketcher
 ===========
 
-License
--------
+MapSketcher is an application to annotate maps in collaborative groups.
 
-Copyright (c) 2010 Sebastián Gamboa
+It's mainly designed for education but feel free to use it to whatever it suits you.
+To check a demo of the application visit [this page](http://mapsketcher.sagmor.com).
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+Setup
+-----
 
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
+MapSketcher was designed to be easily deployed at Heroku so you can get your own instance of MapSketcher running simply by executing this commands:
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
+    git clone git://github.com/sagmor/mapsketcher.git
+    cd mapsketcher
+    heroku create
+    heroku addons:add mongohq:free
+    git push heroku master
 
+Also if you want to take advantage of other advanced features of MapSketcher, I recomend yo to check out the [Configuration](https://github.com/sagmor/mapsketcher/wiki/Configuration) page in the wiki.
+
+Note on Patches/Pull Requests
+-----------------------------
+ 
+* Fork the project.
+* Make your feature addition or bug fix.
+* Add tests for it. This is important so I don't break it in a
+  future version unintentionally.
+* Commit
+* Send me a pull request. Bonus points for topic branches.
+
+
+Copyright
+---------
+
+Copyright (c) 2010 Sebastián Gamboa. See LICENSE for details.
