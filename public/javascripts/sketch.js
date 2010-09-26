@@ -6,9 +6,11 @@ var Sketch = (function(){
       this.latitude = data.latitude;
       this.longitude = data.longitude;
       this.new_record = false;
+      this.created_at = data.created_at;
     } else {
       this.id = '' + new Date().getTime();
       this.points = [];
+      this.created_at = '';
       this.new_record = true;
     }
   }
@@ -28,6 +30,7 @@ var Sketch = (function(){
     
     objects.add(this);
     
+    var _this = this;
     jQuery.ajax({
       url: '/sketches.json',
       data: {
@@ -37,7 +40,7 @@ var Sketch = (function(){
       },
       type: 'POST',
       success: function(data) {
-        objects.remove(this);
+        objects.remove(_this);
         
         var saved_sketch = new Sketch(data);
         objects.add(saved_sketch);
@@ -58,6 +61,17 @@ var Sketch = (function(){
       strokeWeight: 2
     });
   }
+  
+  Sketch.prototype.bounds = function() {
+    var bounds = new google.maps.LatLngBounds();
+
+    _.each(this.points, function(p) {
+      bounds.extend(new google.maps.LatLng(p.latitude, p.longitude));
+    });
+
+    return bounds;
+  }
+    
     
   return Sketch;
 })();

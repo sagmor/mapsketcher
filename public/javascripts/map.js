@@ -75,7 +75,6 @@ var Map = (function(){
   
   Map.prototype.undraw = function(sketch) {
     if (this.polylines[sketch.id]) {
-      this.polylines[sketch.id] = null;
       this.polylines[sketch.id].setMap(null);
       this.polylines[sketch.id] = null;
     }

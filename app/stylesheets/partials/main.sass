@@ -23,5 +23,38 @@ body, img
   background-color: #666
 
 #objects
+  overflow-y: scroll
   position: absolute
   background-color: #888
+
+  .sketch
+    height: 45px
+    width: 90%
+
+    .thumbnail
+      height: 40px
+      width: 40px
+      float: left
+
+    .date
+      padding-left: 3px
+
+    .actions
+      float: right
+      display: block
+      height: 30px
+      width: 70px
+      margin-top: 5px
+
+      a
+        height: 30px
+        width: 30px
+        display: block
+
+        &.goto
+          float: left
+          background: url('../../images/goto.png') no-repeat
+
+        &.destroy
+          float: right
+          background: url('../../images/destroy.png') no-repeat

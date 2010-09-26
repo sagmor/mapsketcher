@@ -7,9 +7,9 @@
     = javascript_include_tag "/config.js"
     = javascript_include_tag :defaults, :all, :cache => false
     = csrf_meta_tag
-    = stylesheet_link_tag 'compiled/handheld.css', :media => 'handheld'
     = stylesheet_link_tag 'compiled/landscape.css', :media => 'screen and (orientation:landscape)'
     = stylesheet_link_tag 'compiled/portrait.css', :media => 'screen and (orientation:portrait)'
+    = stylesheet_link_tag 'compiled/handheld.css', :media => 'handheld, only screen and (max-device-width: 480px)'
     %meta{ :name => "viewport", :content => "width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=no;" }/
 
   %body
