@@ -7,11 +7,13 @@ var Sketch = (function(){
       this.longitude = data.longitude;
       this.new_record = false;
       this.created_at = data.created_at;
+      this.address = data.address;
     } else {
       this.id = '' + new Date().getTime();
       this.points = [];
       this.created_at = '';
       this.new_record = true;
+      this.address = '';
     }
   }
   

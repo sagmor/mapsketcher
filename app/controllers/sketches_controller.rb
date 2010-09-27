@@ -3,7 +3,7 @@ class SketchesController < ApplicationController
   
   # GET /sketches(.:format)
   def index
-    @sketches = Sketch.all
+    @sketches = Sketch.active
     respond_with @sketches
   end
 
@@ -23,8 +23,8 @@ class SketchesController < ApplicationController
   # DELETE /sketches/:id(.:format)
   def destroy
     @sketch = Sketch.find(params[:id])
-    @sketch.destroy
+    @sketch.delete!
 
-    respond_with @sketch
+    respond_with @sketch.id
   end
 end

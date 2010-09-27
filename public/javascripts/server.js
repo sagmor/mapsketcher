@@ -17,6 +17,12 @@ var Server = (function(){
     this.pusher.bind('go_to', function(data) {
       server.map.go_to(data);
     });
+
+    this.pusher.bind('delete', function(id) {
+      s = new Sketch();
+      s.id = id;
+      server.objects.remove(s);
+    });
   }
   
   return Server;

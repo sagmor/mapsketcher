@@ -7,7 +7,7 @@ var Objects = (function(){
     '<div id="sketch-<%= id %>" class="sketch">' +
     '<div class="thumbnail"></div>' +
     '<span class="date">' +
-    '<%= created_at %>' +
+    '<%= address %>' +
     '</span>' +
     '<span class="actions">' +
     '<a class="goto">&nbsp;</a>' +
@@ -44,7 +44,12 @@ var Objects = (function(){
       return false;
     });
     $('a.destroy', obj).click(function() {
-      _this.remove(sketch);
+      // _this.remove(sketch);
+      $(this).toggle();
+      $.ajax({
+        url: '/sketches/' + sketch.id + '.json',
+        type: 'DELETE'
+      });
       return false;
     });
     obj.prependTo('#objects');
