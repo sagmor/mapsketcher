@@ -14,5 +14,6 @@ gem 'mongoid', '2.0.0.beta.17'
 
 group :development, :test do
   gem 'rspec-rails', '>= 2.0.0.beta.20'
-  gem 'factory_girl'
+  gem 'factory_girl_rails'
+  gem 'database_cleaner'
 end

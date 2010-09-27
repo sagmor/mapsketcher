@@ -9,8 +9,8 @@ class SketcherController < ApplicationController
   
   def go_to
     Pusher['mapsketcher'].trigger('go_to', {
-      :latitude => params[:latitude], 
-      :longitude => params[:longitude]
+      :latitude => params[:latitude].to_f, 
+      :longitude => params[:longitude].to_f
     })
     
     render :status => 200, :text => ''

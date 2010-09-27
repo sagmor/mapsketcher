@@ -15,11 +15,7 @@ class SketchesController < ApplicationController
 
   # POST /sketches(.:format)
   def create
-    @sketch = Sketch.new(params[:sketch])
-    
-    if @sketch.save
-      Pusher['mapsketcher'].trigger('create', @sketch.as_json)
-    end
+    @sketch = Sketch.create(params[:sketch])
     
     respond_with @sketch
   end

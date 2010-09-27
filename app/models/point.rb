@@ -9,6 +9,8 @@ class Point
   
   embedded_in :sketch, :inverse_of => :points
 
+  validates_presence_of :position, :latitude, :longitude
+
   def as_json(options = {})
     {
       :position => position.to_i,
