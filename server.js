@@ -1,5 +1,5 @@
-require.paths.unshift(__dirname + "/vendor");
-require.paths.unshift(__dirname + "/lib");
+require.paths.unshift("./vendor");
+require.paths.unshift("./lib");
 
 process.addListener('uncaughtException', function (err, stack) {
   console.log('------------------------');
@@ -11,5 +11,5 @@ process.addListener('uncaughtException', function (err, stack) {
 var MapSketcher = require('map_sketcher');
 
 new MapSketcher({
-  port: 8000
+  port: 8080
 });
