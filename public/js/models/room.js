@@ -65,21 +65,27 @@ Room.prototype.add = function(sketch) {
 Room.prototype.setActive = function(active) {
   var self = this;
 
-  if ( self.client.activeRoom == self ) return;
 
   if (active) {
+    if ( self.client.activeRoom == self ) return;
     if ( self.client.activeRoom )
       self.client.activeRoom.setActive(false);
+    self.client.activeRoom = self;
 
     self.workspace = new Workspace(self);
     self.workspace.start();
+    self.dom.style.border = "3px solid red";
   } else {
     self.workspace.stop();
-    self.workspace = nil;
+    self.workspace = null;
+    self.dom.style.border = "";
   }
 }
 
 Room.prototype.moveTo = function(pos, skipWorkspace) {
+
+  if( this.currentPosition == pos) return;
+
   this.currentPosition = pos;
   this.map.moveTo({
     lat: pos.lat

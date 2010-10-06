@@ -16,5 +16,8 @@ Workspace.prototype.start = function() {
   self.map.onMove(function(position) {
     self.room.moveTo(position, true);
   })
+}
 
+Workspace.prototype.stop = function() {
+  self.map = null;
 }
