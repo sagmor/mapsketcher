@@ -2,8 +2,33 @@
 <html>
 	<head>
 		<title>MapSketcher</title>
+    <link rel="stylesheet" href="/css/iui/default-theme.css" />
     <link rel="stylesheet" href="/css/application.css" />
+    <script type="text/javascript"
+      src="http://maps.google.com/maps/api/js?sensor=false"></script>
+    <script type="text/javascript" src="/socket.js"></script>
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/underscore.js"></script>
+    <script type="text/javascript" src="/js/models/room.js"></script>
+    <script type="text/javascript" src="/js/models/map.js"></script>
+    <script type="text/javascript" src="/js/models/sketch.js"></script>
+    <script type="text/javascript" src="/js/models/workspace.js"></script>
+    <script type="text/javascript" src="/js/map_sketcher_client.js"></script>
     <script type="text/javascript" src="/js/application.js"></script>
 	</head>
-	<body></body>
+  <body>
+    <div id="wrapper">
+      <div id="workspace">
+        <div id="map"></div>
+        <div id="sketches"></div>
+      </div>
+      <div id="toolbar" class="toolbar"></div>
+      <div id="rooms">
+        <div class="room" id="personal"></div>
+        <div class="room" id="selected">
+        </div>
+        <div class="room" id="global"></div>
+      </div>
+    </div>
+  </body>
 </html> 

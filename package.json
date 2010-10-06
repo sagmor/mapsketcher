@@ -3,6 +3,7 @@
 , dependencies: 
   { "node-static": "0.5.1" 
   , "faye": "0.5.2"
+  , "express": "1.0.0rc3"
   }
 }
 
