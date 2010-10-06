@@ -23,6 +23,9 @@ function Map(options) {
 
   self.gmap = new google.maps.Map(self.dom,
     mapOptions);
+
+  if (options.position)
+    self.moveTo(options.position);
 }
 
 Map.prototype.onMove = function(callback) {
@@ -50,4 +53,11 @@ Map.prototype.getPosition = function() {
 Map.prototype.moveTo = function(pos) {
   this.gmap.panTo(new google.maps.LatLng(pos.lat, pos.lng));
   this.gmap.setZoom(pos.zoom);
+}
+
+Map.prototype.onClick = function(callback) {
+  var self = this;
+   google.maps.event.addListener(self.gmap, 'click', function() {
+    callback();
+  });
 }

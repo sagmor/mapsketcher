@@ -10,6 +10,7 @@ Workspace.prototype.start = function() {
   self.map = new Map({
     dom: self.client.getWorkspaceMapDom()
   , controllable: true 
+  , position: self.room.currentPosition
   });
 
   self.map.onMove(function(position) {

@@ -37,9 +37,17 @@ MapSketcherClient.prototype.launch = function() {
   { client: self
   , name: 'global'
   , dom: document.getElementById('global')
+  , editable: false
   });
 
-  self.globalRoom.setActive(true);
+  self.personalRoom = new Room(
+  { client: self
+  , name: 'personal'
+  , dom: document.getElementById('personal')
+  , persisted: false
+  });
+
+  self.personalRoom.setActive(true);
 }
 
 MapSketcherClient.prototype.getWorkspaceMapDom = function() {

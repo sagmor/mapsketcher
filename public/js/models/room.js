@@ -6,6 +6,16 @@ function Room(options) {
   this.client = options.client;
   this.name = options.name;
   this.dom = options.dom;
+  this.editable = (typeof options.editable == 'undefined') ?
+    true : options.editable;
+  this.persisted = (typeof options.persisted == 'undefined') ?
+    true : options.editable;
+
+  this.currentPosition = 
+  { lat: -33.457788
+  , lng: -70.664105
+  , zoom: 16
+  }
 
   this.start();
 }
@@ -14,9 +24,10 @@ Room.prototype.start = function() {
   var self = this;
 
   // Subscribe to sketch updates.
-  self.client.subscribe(self.roomPath('sketches'), function(sketch) {
-    self.add(sketch);
-  });
+  if (self.persisted)
+    self.client.subscribe(self.roomPath('sketches'), function(sketch) {
+      self.add(sketch);
+    });
 
   // Download preiows sketches
   // TODO
@@ -25,6 +36,15 @@ Room.prototype.start = function() {
   self.map = new Map({
     dom: self.dom
   , controllable: false
+  , position:
+    { lat: self.currentPosition.lat
+    , lng: self.currentPosition.lng
+    , zoom: self.currentPosition.zoom - 4
+    }
+  });
+
+  self.map.onClick(function() {
+    self.setActive(true);
   });
 }
 
@@ -34,7 +54,8 @@ Room.prototype.roomPath = function(zone) {
 
 Room.prototype.stop = function() {
   var self = this;
-  self.client.unsubscribe(self.roomPath('sketches'));
+  if (self.persisted)
+    self.client.unsubscribe(self.roomPath('sketches'));
 }
   
 Room.prototype.add = function(sketch) {
