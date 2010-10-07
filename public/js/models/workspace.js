@@ -14,8 +14,14 @@ Workspace.prototype.start = function() {
   });
 
   self.map.onMove(function(position) {
-    self.room.moveTo(position, true);
+    self.room.moveTo(position, 
+    { userMove: self.map.userMove
+    });
   })
+}
+
+Workspace.prototype.moveTo = function(pos) {
+  this.map.moveTo(pos);
 }
 
 Workspace.prototype.stop = function() {

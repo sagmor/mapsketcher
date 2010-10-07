@@ -26,17 +26,26 @@ function Map(options) {
 
   if (options.position)
     self.moveTo(options.position);
+
+  google.maps.event.addListener(self.gmap, 'dragstart', function() {
+    self.userMove = true;
+  });
+  google.maps.event.addListener(self.gmap, 'dragend', function() {
+    self.userMove = false;
+  });
 }
 
 Map.prototype.onMove = function(callback) {
   var self = this;
   
   google.maps.event.addListener(self.gmap, 'center_changed', function() {
-    callback(self.getPosition());
+    if (self.userMove)
+      callback(self.getPosition());
   });
   
   google.maps.event.addListener(self.gmap, 'zoom_changed', function() {
-    callback(self.getPosition());
+    if (self.userMove)
+      callback(self.getPosition());
   });
 }
 

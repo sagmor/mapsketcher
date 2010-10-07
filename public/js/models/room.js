@@ -24,11 +24,15 @@ Room.prototype.start = function() {
   var self = this;
 
   // Subscribe to sketch updates.
-  if (self.persisted)
+  if (self.persisted) {
     self.client.subscribe(self.roomPath('sketches'), function(sketch) {
       self.add(sketch);
     });
-
+    self.client.subscribe(self.roomPath('moves'), function(data) {
+      if (data.client != self.client.guid)
+        self.moveTo(data.position)
+    });
+  }
   // Download preiows sketches
   // TODO
 
@@ -82,7 +86,7 @@ Room.prototype.setActive = function(active) {
   }
 }
 
-Room.prototype.moveTo = function(pos, skipWorkspace) {
+Room.prototype.moveTo = function(pos, options) {
 
   if( this.currentPosition == pos) return;
 
@@ -93,7 +97,10 @@ Room.prototype.moveTo = function(pos, skipWorkspace) {
   , zoom: pos.zoom - 4
   });
 
-  if (!skipWorkspace && workspace)
-    workspace.moveTo(pos);
+  if (options && options.userMove) {
+    if (this.persisted) this.client.sendMove(this, pos);
+  } else {
+    if (this.workspace) this.workspace.moveTo(pos);
+  }
 
 }

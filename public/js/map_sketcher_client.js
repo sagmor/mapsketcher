@@ -10,8 +10,17 @@ function MapSketcherClient(options) {
   ,  hostname: options.hostname
   };
 
+function S4() {
+   return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+}
+function guid() {
+   return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
+}
+
+
   var init = function() {
     setupBayeuxClient();
+    self.guid = guid();
   }
 
   var setupBayeuxClient = function() {
@@ -52,4 +61,12 @@ MapSketcherClient.prototype.launch = function() {
 
 MapSketcherClient.prototype.getWorkspaceMapDom = function() {
   return document.getElementById('map');
+}
+
+MapSketcherClient.prototype.sendMove = function(room, pos) {
+  this.socket.publish(room.roomPath('moves'), 
+  { client: this.guid
+  , position: pos
+  });
+  
 }
