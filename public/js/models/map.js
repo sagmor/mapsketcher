@@ -33,6 +33,12 @@ function Map(options) {
   google.maps.event.addListener(self.gmap, 'dragend', function() {
     self.userMove = false;
   });
+
+  // Create Overlay to capture XY Position
+  this.overlay = new google.maps.OverlayView();
+  this.overlay.draw = function() {};
+  this.overlay.onRemove = function() {};
+  this.overlay.setMap(this.gmap);
 }
 
 Map.prototype.onMove = function(callback) {
@@ -60,6 +66,11 @@ Map.prototype.getPosition = function() {
 }
 
 Map.prototype.moveTo = function(pos) {
+  if (this.locked) {
+    this.lastMove = pos;
+    return;
+  }
+
   this.gmap.panTo(new google.maps.LatLng(pos.lat, pos.lng));
   this.gmap.setZoom(pos.zoom);
 }
@@ -69,4 +80,36 @@ Map.prototype.onClick = function(callback) {
    google.maps.event.addListener(self.gmap, 'click', function() {
     callback();
   });
+}
+
+Map.prototype.lock = function() {
+  this.locked = true;
+
+  this.gmap.setOptions({
+    navigationControl: false
+  });
+
+}
+
+Map.prototype.unlock = function() {
+  this.locked = false;
+  if (this.lastMove) {
+    this.moveTo(this.lastMove);
+    delete this.lastMove;
+  }
+
+  this.gmap.setOptions({
+    navigationControl: true
+  });
+}
+
+Map.prototype.getXYPosition = function(x, y) {
+  var location = this.overlay
+    .getProjection()
+    .fromContainerPixelToLatLng(new google.maps.Point(x, y));
+
+  return {
+    latitude:  location.lat()
+  , longitude: location.lng()
+  }
 }

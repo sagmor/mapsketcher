@@ -2,6 +2,8 @@ function Workspace(room) {
   var self = this;
   self.room = room;
   self.client = self.room.client;
+  self.mode = 'panning';
+  self.canvas = new Canvas(self);
 }
 
 Workspace.prototype.start = function() {
@@ -17,13 +19,44 @@ Workspace.prototype.start = function() {
     self.room.moveTo(position, 
     { userMove: self.map.userMove
     });
-  })
+  });
+
+  $('#toggleModeButton').click(function() {
+    if (self.mode == 'panning')
+      self.switchTo('drawing')
+    else 
+      self.switchTo('panning')
+
+    return false;
+  });
 }
 
 Workspace.prototype.moveTo = function(pos) {
-  this.map.moveTo(pos);
+  var self = this;
+  self.map.moveTo(pos);
 }
 
 Workspace.prototype.stop = function() {
   self.map = null;
+  $('#toggleModeButton').unbind('click');
+}
+
+Workspace.prototype.switchTo= function(mode) {
+  var self = this;
+  self.mode = mode;
+
+  switch(self.mode) {
+    case 'panning':
+      self.map.unlock();
+      self.canvas.stop();
+      break;
+    case 'drawing':
+      self.map.lock();
+      self.canvas.start();
+      break;
+  }
+}
+
+Workspace.prototype.save = function(sketch) {
+  this.room.save(sketch);
 }

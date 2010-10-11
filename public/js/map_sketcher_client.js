@@ -70,3 +70,10 @@ MapSketcherClient.prototype.sendMove = function(room, pos) {
   });
   
 }
+
+MapSketcherClient.prototype.sendSketch = function(room, sketch) {
+  var data = sketch.to_json();
+  data.client = this.guid;
+
+  this.socket.publish(room.roomPath('sketches'), data);
+}

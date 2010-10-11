@@ -2,6 +2,7 @@
 <html>
 	<head>
 		<title>MapSketcher</title>
+    <link rel="stylesheet" href="/css/iui/iui.css" />
     <link rel="stylesheet" href="/css/iui/default-theme.css" />
     <link rel="stylesheet" href="/css/application.css" />
     <script type="text/javascript"
@@ -12,6 +13,8 @@
     <script type="text/javascript" src="/js/models/room.js"></script>
     <script type="text/javascript" src="/js/models/map.js"></script>
     <script type="text/javascript" src="/js/models/sketch.js"></script>
+    <script type="text/javascript" src="/js/models/polyline.js"></script>
+    <script type="text/javascript" src="/js/models/canvas.js"></script>
     <script type="text/javascript" src="/js/models/workspace.js"></script>
     <script type="text/javascript" src="/js/map_sketcher_client.js"></script>
     <script type="text/javascript" src="/js/application.js"></script>
@@ -22,7 +25,10 @@
         <div id="map"></div>
         <div id="sketches"></div>
       </div>
-      <div id="toolbar" class="toolbar"></div>
+      <div id="toolbar" class="toolbar">
+        <h1 id="pageTitle">MapSketcher</h1>
+        <a href="#" id="toggleModeButton" class="button">switch</a>
+      </div>
       <div id="rooms">
         <div class="room" id="personal"></div>
         <div class="room" id="selected">

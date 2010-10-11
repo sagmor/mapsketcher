@@ -3,6 +3,7 @@ function Room(options) {
     return new arguments.callee(arguments);
   }
 
+  this.sketches = [];
   this.client = options.client;
   this.name = options.name;
   this.dom = options.dom;
@@ -62,8 +63,23 @@ Room.prototype.stop = function() {
     self.client.unsubscribe(self.roomPath('sketches'));
 }
   
-Room.prototype.add = function(sketch) {
-  console.log(self.name, sketch);
+Room.prototype.save = function(sketch) {
+  if(this.persisted) {
+    this.client.sendSketch(this, sketch);
+  } else {
+    this.add(sketch.to_json());
+  }
+}
+
+Room.prototype.add = function(data) {
+  var sketch = new Sketch(data);
+  this.sketches.push(sketch);
+
+  sketch.drawAt(this.map);
+  if(this.workspace)
+    sketch.drawAt(this.workspace.map);
+
+  console.log(this.name, sketch);
 }
 
 Room.prototype.setActive = function(active) {
