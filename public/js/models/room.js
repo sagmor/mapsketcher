@@ -77,7 +77,7 @@ Room.prototype.add = function(data) {
 
   sketch.drawAt(this.map);
   if(this.workspace)
-    sketch.drawAt(this.workspace.map);
+    this.workspace.addSketch(sketch);
 
   console.log(this.name, sketch);
 }

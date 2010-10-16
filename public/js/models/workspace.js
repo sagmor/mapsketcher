@@ -29,6 +29,14 @@ Workspace.prototype.start = function() {
 
     return false;
   });
+
+  _.each(self.room.sketches, function(sketch) {
+    self.addSketch(sketch);
+  });
+}
+
+Workspace.prototype.addSketch = function(sketch) {
+  sketch.drawAt(this.map);
 }
 
 Workspace.prototype.moveTo = function(pos) {
