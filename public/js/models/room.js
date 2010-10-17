@@ -24,8 +24,8 @@ function Room(options) {
 Room.prototype.start = function() {
   var self = this;
 
-  // Subscribe to sketch updates.
   if (self.persisted) {
+    // Subscribe to sketch updates.
     self.client.subscribe(self.roomPath('sketches'), function(sketch) {
       self.add(sketch);
     });
@@ -33,9 +33,14 @@ Room.prototype.start = function() {
       if (data.client != self.client.guid)
         self.moveTo(data.position)
     });
+
+    // Download preiows sketches
+    $.getJSON('/rooms/'+ this.name +'/sketches.json', function(data) {
+      _.each(data.sketches, function(sketch) {
+         self.add(sketch);
+      });
+    })
   }
-  // Download preiows sketches
-  // TODO
 
   // Display Map
   self.map = new Map({
