@@ -9,6 +9,7 @@
     <script type="text/javascript" src="/socket.js"></script>
     <script type="text/javascript" src="/js/jquery.js"></script>
     <script type="text/javascript" src="/js/jquery.mobile.js"></script>
+    <script type="text/javascript" src="/js/jquery.tools.js"></script>
     <script type="text/javascript" src="/js/underscore.js"></script>
     <script type="text/javascript" src="/js/models/room.js"></script>
     <script type="text/javascript" src="/js/models/map.js"></script>
@@ -19,15 +20,16 @@
     <script type="text/javascript" src="/js/map_sketcher_client.js"></script>
     <script type="text/javascript" src="/js/application.js"></script>
 	</head>
-  <body>
-    <div id="wrapper" data-role="page" data-theme="a">
+  <body data-theme="a">
+    <div id="wrapper" data-role="page">
       <div id="workspace" data-role="content">
         <div id="map"></div>
         <div id="sketches"></div>
       </div>
       <div id="toolbar" data-role="footer" class="ui-bar ui-bar-a ui-footer">
         <h4>MapSketcher</h4>
-        <a href="#" id="toggleModeButton" data-role="button" class="ui-btn-right">switch</a>
+        <a id="toggleModeButton" data-role="button" class="ui-btn-right">switch</a>
+        <a href="#" rel="#collaborativeRoomSelection">Change Collaborative Room</a>
       </div>
       <div id="rooms">
         <div class="room" id="personal"></div>
@@ -35,6 +37,36 @@
         </div>
         <div class="room" id="global"></div>
       </div>
+    </div>
+
+    <div id="collaborativeRoomSelection" class="overlay" data-role="page">
+      <div style="width: 95%;" data-role="header" data-theme="e" data-position="inline" class="ui-bar ui-bar-a ui-header"> 
+        <a href="#" class="close" data-icon="delete">Cancel</a>
+        <h1>Choose your Colaborative Room</h1> 
+      </div> 
+
+      <div data-role="content" data-theme="e"> 
+        <br />
+        <br />
+        <br />
+        <br />
+        
+        <form action="">
+          <div data-role="fieldcontain"> 
+            <label for="name">Room Name:</label> 
+            <input type="text" name="name" id="name" value=""  /> 
+          </div> 
+
+          <div class="ui-body ui-body-b"> 
+            <fieldset class="ui-grid-a"> 
+              <div class="ui-block-a"><button type="submit" data-theme="d">Cancel</button></div> 
+              <div class="ui-block-b"><button type="submit" data-theme="a">Submit</button></div>	   
+            </fieldset> 
+          </div> 
+          
+        	
+        </form>
+      </div> 
     </div>
   </body>
 </html> 

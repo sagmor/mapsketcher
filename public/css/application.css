@@ -1,67 +1,13 @@
-/* RESET */
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, font, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  outline: 0;
-  font-weight: inherit;
-  font-style: inherit;
-  font-size: 100%;
-  font-family: inherit;
-  vertical-align: baseline;
-}
-
 body {
-  line-height: 1;
-  color: black;
-  background: white;
   overflow: hidden;
-}
-
-ol, ul {
-  list-style: none;
-}
-
-table {
-  border-collapse: separate;
-  border-spacing: 0;
-  vertical-align: middle;
-}
-
-caption, th, td {
-  text-align: left;
-  font-weight: normal;
-  vertical-align: middle;
-}
-
-q, blockquote {
-  quotes: "" "";
-}
-q:before, q:after, blockquote:before, blockquote:after {
-  content: "";
-}
-
-a img {
-  border: none;
-}
-
-body, img {
-  -webkit-user-select: none;
 }
 
 #wrapper {
   position: absolute;
-  top: 0px;
-  left: 0px;
-  width: 100%;
-  height: 100%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
 #toolbar {
@@ -129,5 +75,19 @@ body, img {
   left: 0;
   width: 50%;
   height: 30%;
+}
+
+.overlay {
+  display: none;
+  z-index:10000;
+/* styling */
+	background-color:#fff;
+	
+	width:555px;	
+	border:1px solid #666;
+	
+	/* CSS3 styling for latest browsers */
+	-moz-box-shadow:0 0 90px 5px #000;
+	-webkit-box-shadow: 0 0 90px #000;  
 }
 
