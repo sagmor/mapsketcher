@@ -36,7 +36,7 @@ function guid() {
 }
 
 MapSketcherClient.prototype.subscribe = function(chanel,callback) {
-  this.socket.subscribe(chanel,callback);
+  return this.socket.subscribe(chanel,callback);
 }
 
 MapSketcherClient.prototype.launch = function() {
@@ -76,4 +76,20 @@ MapSketcherClient.prototype.sendSketch = function(room, sketch) {
   data.client = this.guid;
 
   this.socket.publish(room.roomPath('sketches'), data);
+}
+
+MapSketcherClient.prototype.joinColaborativeRoom = function(room) {
+  var oldRoom = this.selectedRoom;
+
+  this.selectedRoom = new Room(
+  { client: this
+  , name: room
+  , dom: document.getElementById('selected')
+  });
+
+  this.selectedRoom.setActive(true);
+
+  if (oldRoom) {
+    oldRoom.stop();
+  }
 }

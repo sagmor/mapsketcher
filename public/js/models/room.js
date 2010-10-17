@@ -4,6 +4,7 @@ function Room(options) {
   }
 
   this.sketches = [];
+  this.subscriptions = [];
   this.client = options.client;
   this.name = options.name;
   this.dom = options.dom;
@@ -26,13 +27,13 @@ Room.prototype.start = function() {
 
   if (self.persisted) {
     // Subscribe to sketch updates.
-    self.client.subscribe(self.roomPath('sketches'), function(sketch) {
+    self.subscriptions.push(self.client.subscribe(self.roomPath('sketches'), function(sketch) {
       self.add(sketch);
-    });
-    self.client.subscribe(self.roomPath('moves'), function(data) {
+    }));
+    self.subscriptions.push(self.client.subscribe(self.roomPath('moves'), function(data) {
       if (data.client != self.client.guid)
         self.moveTo(data.position)
-    });
+    }));
 
     // Download preiows sketches
     $.getJSON('/rooms/'+ this.name +'/sketches.json', function(data) {
@@ -64,8 +65,10 @@ Room.prototype.roomPath = function(zone) {
 
 Room.prototype.stop = function() {
   var self = this;
-  if (self.persisted)
-    self.client.unsubscribe(self.roomPath('sketches'));
+
+  _.each(self.subscriptions, function(s) {
+    s.cancel();
+  })
 }
   
 Room.prototype.save = function(sketch) {

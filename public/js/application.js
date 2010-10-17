@@ -14,10 +14,15 @@ jQuery(function() {
     }
   });
 
+  $('#collaborativeRoomSelection form .cancel').click(function(e) {
+    $('.close').click();
+    return e.preventDefault();
+  });
+  
   $('#collaborativeRoomSelection form').submit(function(e) {
     $('.close').click();
-
-    // TODO: Load Room
+    
+    mapSketcherClient.joinColaborativeRoom(this.name.value);
 
     return e.preventDefault();
   });
