@@ -2,6 +2,7 @@ function Map(options) {
   var self = this;
   self.dom = options.dom;
   self.controllable = options.controllable;
+  self.showCredits = options.showCredits;
 
   var latlng = new google.maps.LatLng(-34.397, 150.644);
   var mapOptions =
@@ -39,6 +40,13 @@ function Map(options) {
   this.overlay.draw = function() {};
   this.overlay.onRemove = function() {};
   this.overlay.setMap(this.gmap);
+
+  // Clean the exesive gmaps credits.
+  if (!self.showCredits)
+    setTimeout(function() {
+      console.log('cleaning up credits!');
+      $('a[target="_blank"]', self.dom).parent().detach();
+  }, 800);
 }
 
 Map.prototype.onMove = function(callback) {

@@ -13,6 +13,7 @@ Workspace.prototype.start = function() {
     dom: self.client.getWorkspaceMapDom()
   , controllable: true 
   , position: self.room.currentPosition
+  , showCredits: true
   });
 
   self.map.onMove(function(position) {
