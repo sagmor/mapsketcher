@@ -7,6 +7,7 @@
     <script type="text/javascript"
       src="http://maps.google.com/maps/api/js?sensor=false"></script>
     <script type="text/javascript" src="/socket.js"></script>
+    <script type="text/javascript" src="/js/webkitdragdrop.js"></script>
     <script type="text/javascript" src="/js/jquery.js"></script>
     <script type="text/javascript" src="/js/jquery.mobile.js"></script>
     <script type="text/javascript" src="/js/jquery.tools.js"></script>
@@ -29,13 +30,15 @@
       <div id="toolbar" data-role="footer" class="ui-bar ui-bar-a ui-footer">
         <h4>MapSketcher</h4>
         <a id="toggleModeButton" data-role="button" class="ui-btn-right">switch</a>
-        <a href="#" rel="#collaborativeRoomSelection">Change Collaborative Room</a>
+        <a href="#" rel="#collaborativeRoomSelection">Collaborative Room</a>
       </div>
       <div id="rooms">
-        <div class="room" id="personal"></div>
+        <div class="room" id="personal">
+        </div>
         <div class="room" id="selected">
         </div>
-        <div class="room" id="global"></div>
+        <div class="room" id="global">
+        </div>
       </div>
     </div>
 

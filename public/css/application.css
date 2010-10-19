@@ -63,6 +63,21 @@ body {
   width: 100%;
 }
 
+
+.drag {
+  position: absolute;
+  height: 40px;
+  right: 0;
+  width: 40px;
+  background: url(drag/drag.png) no-repeat center center;
+  z-index: 1000;
+}
+
+.map {
+  height: 100%;
+  width: 100%;
+}
+
 #minimap {
   bottom: 0;
   right: 0;

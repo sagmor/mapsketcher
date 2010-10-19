@@ -57,6 +57,19 @@ Room.prototype.start = function() {
   self.map.onClick(function() {
     self.setActive(true);
   });
+
+  self.drag = new webkit_draggable(self.dom.id, {revert: 'always'});
+  self.dom.room = self;
+  self.drop = webkit_drop.add(self.dom.id, {onDrop: function(dragable) {
+    self.copySketches(dragable.room);
+  }});
+}
+
+Room.prototype.copySketches = function(room) {
+  var self = this;
+  _.each(room.sketches, function(sketch) {
+    self.save(sketch);
+  })
 }
 
 Room.prototype.roomPath = function(zone) {
@@ -68,7 +81,7 @@ Room.prototype.stop = function() {
 
   _.each(self.subscriptions, function(s) {
     s.cancel();
-  })
+  });
 }
   
 Room.prototype.save = function(sketch) {
@@ -86,8 +99,6 @@ Room.prototype.add = function(data) {
   sketch.drawAt(this.map);
   if(this.workspace)
     this.workspace.addSketch(sketch);
-
-  console.log(this.name, sketch);
 }
 
 Room.prototype.setActive = function(active) {
