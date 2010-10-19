@@ -1,3 +1,26 @@
+var MapTiles = new google.maps.ImageMapType(
+  { alt: 'Cached Tiles'
+  , getTileUrl: function(point,number) {
+      return '';
+    }
+  , isPng: true
+  , tileSize: google.maps.Size(256,256,'px','px')
+
+});
+
+
+var CachedMapType = new google.maps.ImageMapType({
+	getTileUrl: function(coord, zoom) {
+		return "/tiles/" +
+		zoom + "/" + coord.x + "/" + coord.y + ".png";
+	},
+	tileSize: new google.maps.Size(256, 256),
+	isPng: true,
+	alt: "CachedMapType layer",
+	name: "CachedMapType"
+})
+
+
 function Map(options) {
   var self = this;
   self.dom = options.dom;
@@ -24,6 +47,10 @@ function Map(options) {
 
   self.gmap = new google.maps.Map(self.dom,
     mapOptions);
+
+  self.gmap.overlayMapTypes.insertAt(0, CachedMapType);
+	self.gmap.setMapTypeId('CachedMapType');
+  
 
   if (options.position)
     self.moveTo(options.position);
