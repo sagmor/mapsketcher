@@ -26,4 +26,6 @@ jQuery(function() {
 
     return e.preventDefault();
   });
+
+   $('#feedback').githubVoice('sagmor', 'mapsketcher');
 });

@@ -2,6 +2,20 @@ body {
   overflow: hidden;
 }
 
+#feedback {
+  background: #111 url(feedback_tab.png) no-repeat -2px 50%;
+  border: 1px none #1B97F2;
+  border-left: none;
+  display: block;
+  height: 90px;
+  left: 0px;
+  margin-top: -45px;
+  position: fixed;
+  top: 40%;
+  width: 25px;
+  z-index: 101;
+}
+
 #wrapper {
   position: absolute;
   top: 0;
