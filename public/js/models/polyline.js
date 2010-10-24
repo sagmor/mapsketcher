@@ -30,7 +30,7 @@ Polyline.prototype.to_gpolyline = function() {
     path: _.map(this.points, Polyline.posToGPoint)
   , strokeColor: this.color
   , strokeOpacity: 1.0
-  , strokeWeight: 2 
+  , strokeWeight: 4 
   });
 } 
 

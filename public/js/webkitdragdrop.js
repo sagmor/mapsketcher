@@ -415,6 +415,14 @@ var webkit_draggable = function(r, ip)
 		handle.addEventListener("touchstart", this.ts, false);
 		handle.addEventListener("touchmove", this.tm, false);
 		handle.addEventListener("touchend", this.te, false);
+
+		this.md = webkit_tools.bindAsEventListener(this.mouseDown, this);
+		this.mm = webkit_tools.bindAsEventListener(this.mouseMove, this);
+		this.mu = webkit_tools.bindAsEventListener(this.mouseUp, this);		
+		
+		handle.addEventListener("mousedown", this.md, false);
+		handle.addEventListener("mousemove", this.mm, false);
+		handle.addEventListener("mouseup", this.mu, false);
 	}	
 	
 	this.destroy = function()
@@ -521,6 +529,29 @@ var webkit_draggable = function(r, ip)
 		r.style.zIndex = this.p.z;
 		this.p.onEnd();
 	}
+
+	this.mouseDown = function(event)
+  {
+    event.targetTouches = [event];
+    this.isClicked = true;
+    this.touchStart(event);
+  }
+
+	this.mouseMove = function(event)
+  {
+    if (this.isClicked)
+    {
+      event.targetTouches = [event];
+      this.touchMove(event);
+    }
+  }
+
+	this.mouseUp = function(event)
+  {
+    event.targetTouches = [event];
+    this.touchEnd(event);
+    this.isClicked = false;
+  }
 	
 	this.getPosition = function()
 	{
