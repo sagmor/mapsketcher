@@ -6,7 +6,7 @@ function Room(options) {
   this.sketches = [];
   this.subscriptions = [];
   this.client = options.client;
-  this.name = options.name.downcase();
+  this.name = options.name.toLowerCase();
   this.dom = options.dom;
   this.editable = (typeof options.editable == 'undefined') ?
     true : options.editable;

@@ -532,6 +532,8 @@ var webkit_draggable = function(r, ip)
 
 	this.mouseDown = function(event)
   {
+		event.preventDefault();
+		event.stopPropagation();
     event.targetTouches = [event];
     this.isClicked = true;
     this.touchStart(event);
@@ -548,6 +550,8 @@ var webkit_draggable = function(r, ip)
 
 	this.mouseUp = function(event)
   {
+		event.preventDefault();
+		event.stopPropagation();
     event.targetTouches = [event];
     this.touchEnd(event);
     this.isClicked = false;

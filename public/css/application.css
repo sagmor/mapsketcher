@@ -74,8 +74,25 @@ body {
 }
 
 #rooms .room {
-  height: 33.34%;
+  height: 30%;
   width: 100%;
+  z-index: 10;
+}
+
+#newRoom {
+  height: 8%;
+  width: 100%;
+  background-color: white;
+  text-align: center;
+  padding-top: 2%;
+}
+
+#personal {
+}
+
+.miniRoom {
+  height: 80%;
+  width: 80%;
 }
 
 

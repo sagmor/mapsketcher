@@ -10,17 +10,9 @@ function MapSketcherClient(options) {
   ,  hostname: options.hostname
   };
 
-function S4() {
-   return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
-}
-function guid() {
-   return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
-}
-
-
   var init = function() {
     setupBayeuxClient();
-    self.guid = guid();
+    self.guid = Utils.guid();
   }
 
   var setupBayeuxClient = function() {
@@ -49,18 +41,34 @@ MapSketcherClient.prototype.launch = function() {
   , editable: false
   });
 
-  self.personalRoom = new Room(
-  { client: self
-  , name: 'personal'
-  , dom: document.getElementById('personal')
-  , persisted: false
+  self.personalRooms = [];
+  self.createNewPersonalRoom();
+  
+  $('#newRoom').click(function(){
+    self.createNewPersonalRoom();
   });
-
-  self.personalRoom.setActive(true);
 }
 
 MapSketcherClient.prototype.getWorkspaceMapDom = function() {
   return document.getElementById('map');
+}
+
+MapSketcherClient.prototype.createNewPersonalRoom = function() {
+  var id = Utils.guid();
+  var div = document.createElement('div');
+  div.id = id;
+  div.className = "miniRoom";
+
+  $('#personal').append(div);
+  var room = new Room(
+  { client: this
+  , name: id
+  , dom: div
+  , persisted: false
+  })
+
+  this.personalRooms.push(room);
+  room.setActive(true);
 }
 
 MapSketcherClient.prototype.sendMove = function(room, pos) {
