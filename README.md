@@ -13,7 +13,7 @@ I'm currently rewriting it to work with [node.js](http://nodejs.org/)
 Setup
 -----
 
-Simply install [npm](http://npmjs.org/) and node.js
+Simply install [mongodb](http://www.mongodb.org/), [npm](http://npmjs.org/) and node.js
 and run:
 
     npm bundle vendor

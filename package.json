@@ -3,7 +3,7 @@
 , dependencies: 
   { "faye": "0.5.2"
   , "express": "1.0.0rc3"
-  , "couchdb": "1.0.0"
+  , "mongodb": "0.7.9"
   }
 }
 
