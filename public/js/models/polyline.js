@@ -1,12 +1,27 @@
-function Polyline(data) {
+function Polyline(data, sketch, options) {
+  var self = this;
   if(data) {
-    this.points = data.points;
-    this.color = data.color; 
+    self.points = data.points;
+    self.color = data.color; 
   } else {
-    this.points = [];
-    this.color = "#FF0000"; 
+    self.points = [];
+    self.color = "#FF0000"; 
   }
   
+  if (sketch) {
+    self.sketch = sketch;
+    $(self.sketch).bind('delete', function() {
+      self.onSketchDelete();
+    })
+  }
+
+  this.options = options || {};
+}
+
+Polyline.prototype.onSketchDelete = function() {
+  if(self.gpolyline) {
+    self.gpolyline.setMap(null);
+  }
 }
 
 Polyline.prototype.addPoint = function(position) {
@@ -26,12 +41,22 @@ Polyline.prototype.addPoint = function(position) {
 } 
 
 Polyline.prototype.to_gpolyline = function() {
-  return new google.maps.Polyline({
-    path: _.map(this.points, Polyline.posToGPoint)
-  , strokeColor: this.color
+  var self = this;
+  var gpolyline = new google.maps.Polyline({
+    path: _.map(self.points, Polyline.posToGPoint)
+  , strokeColor: self.color
   , strokeOpacity: 1.0
   , strokeWeight: 4 
   });
+
+  if (self.options.click) {
+    google.maps.event.addListener(gpolyline, 'click', function() {
+      self.options.click.call(self.sketch, self);
+    });
+      
+  }
+
+  return gpolyline;
 } 
 
 Polyline.posToGPoint = function(pos) {

@@ -1,5 +1,6 @@
 function Map(options) {
   var self = this;
+  self.id = Utils.guid();
   self.dom = options.dom;
   self.controllable = options.controllable;
   self.showCredits = options.showCredits;

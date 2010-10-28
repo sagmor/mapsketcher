@@ -1,8 +1,13 @@
 function Sketch(data) {
-  if(data)
+  if(data) {
+    this.id = data.id;
     this.polylines = data.polylines;
-  else
+  } else {
+    this.id = Utils.guid();
     this.polylines = [];
+  }
+
+  this.drawPool = {};
 }
 
 Sketch.prototype.addPolyline = function(polyline) {
@@ -11,16 +16,41 @@ Sketch.prototype.addPolyline = function(polyline) {
 
 Sketch.prototype.to_json = function() {
   return {
-    polylines: this.polylines
+    id: this.id
+  , polylines: this.polylines
   }
 }
 
-Sketch.prototype.drawAt = function(map) {
-  var objects = _.map(this.polylines, function(o) { return new Polyline(o) });
+Sketch.prototype.destroy = function() {
+  var self = this;
+  _.each(this.drawPool, function(polylines, map_id) {
+    self.unDrawFrom(map_id);
+  });
+}
+
+Sketch.prototype.drawAt = function(map, options) {
+  // var objects = this.drawPool[map] || this.drawPool[map] = this.polylinesObjects(options);
+  var objects = this.polylinesObjects(options);
+  var objects = map.id in this.drawPool ? this.drawPool[map.id] : this.drawPool[map.id] = this.polylinesObjects(options);
   _.each(objects, function(o) { o.setMap(map) });
 }
 
-Sketch.prototype.bounds = _.memoize(function() {
+
+Sketch.prototype.unDrawFrom = function(map_id) {
+  var polylines = this.drawPool[map_id];
+
+  if (polylines) {
+     _.each(polylines, function(p) { p.setMap(null) });
+    delete this.drawPool[map_id]
+  }
+}
+
+Sketch.prototype.polylinesObjects = function(options) {
+  var self = this;
+  return _.map(self.polylines, function(o) { return new Polyline(o, self, options) });
+}
+
+Sketch.prototype.bounds = function() {
   var self = this;
 
   _.reduce(this.polylines, function(bounds, polyline) {
@@ -38,9 +68,9 @@ Sketch.prototype.bounds = _.memoize(function() {
   });
 
 
-});
+}
 
-Sketch.prototype.svgPathData = _.memoize(function() {
+Sketch.prototype.svgPathData = function() {
   var self = this;
   var bounds = self.bounds();
   var pathData = "";
@@ -57,4 +87,4 @@ Sketch.prototype.svgPathData = _.memoize(function() {
 
     return fullPath + 'M' + path;
   }, '');
-});
+}

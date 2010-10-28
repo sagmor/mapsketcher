@@ -37,7 +37,12 @@ Workspace.prototype.start = function() {
 }
 
 Workspace.prototype.addSketch = function(sketch) {
-  sketch.drawAt(this.map);
+  var self = this;
+  sketch.drawAt(self.map,
+      { click: function() {
+          self.room.destroy(this);
+        }
+      });
 }
 
 Workspace.prototype.moveTo = function(pos) {

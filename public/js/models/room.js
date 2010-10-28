@@ -28,7 +28,11 @@ Room.prototype.start = function() {
   if (self.persisted) {
     // Subscribe to sketch updates.
     self.subscriptions.push(self.client.subscribe(self.roomPath('sketches'), function(sketch) {
-      self.add(sketch);
+      if (sketch.type == 'new')
+        self.add(sketch);
+      else if (sketch.type == 'delete')
+        self.remove(sketch);
+
     }));
     self.subscriptions.push(self.client.subscribe(self.roomPath('moves'), function(data) {
       if (data.client != self.client.guid)
@@ -92,6 +96,14 @@ Room.prototype.save = function(sketch) {
   }
 }
 
+Room.prototype.destroy = function(sketch) {
+  if(this.persisted) {
+    this.client.removeSketch(this, sketch);
+  } else {
+    this.remove(sketch.to_json());
+  }
+}
+
 Room.prototype.add = function(data) {
   var sketch = new Sketch(data);
   this.sketches.push(sketch);
@@ -99,6 +111,14 @@ Room.prototype.add = function(data) {
   sketch.drawAt(this.map);
   if(this.workspace)
     this.workspace.addSketch(sketch);
+}
+
+Room.prototype.remove = function(data) {
+  var sketch = _.detect(this.sketches, function(s) { return s.id == data.id });
+  if (sketch) {
+    this.sketches = _.without(this.sketches, sketch);
+    sketch.destroy();
+  }
 }
 
 Room.prototype.setActive = function(active) {

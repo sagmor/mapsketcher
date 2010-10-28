@@ -79,9 +79,20 @@ MapSketcherClient.prototype.sendMove = function(room, pos) {
   
 }
 
+MapSketcherClient.prototype.removeSketch = function(room, sketch) {
+  var data = {
+    id: sketch.id
+  , type: 'delete'
+  , client: this.guid
+  }
+
+  this.socket.publish(room.roomPath('sketches'), data);
+}
+
 MapSketcherClient.prototype.sendSketch = function(room, sketch) {
   var data = sketch.to_json();
   data.client = this.guid;
+  data.type = 'new';
 
   this.socket.publish(room.roomPath('sketches'), data);
 }
