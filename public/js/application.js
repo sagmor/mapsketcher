@@ -28,4 +28,5 @@ jQuery(function() {
   });
 
    $('#feedback').githubVoice('sagmor', 'mapsketcher');
+   $('#personal').touchScrollable();
 });
