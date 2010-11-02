@@ -37,7 +37,7 @@ MapSketcherClient.prototype.launch = function() {
   self.globalRoom = new Room(
   { client: self
   , name: 'global'
-  , dom: document.getElementById('global')
+  , dom: document.getElementById('globalRoom')
   , editable: false
   });
 

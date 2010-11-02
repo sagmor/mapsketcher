@@ -27,23 +27,23 @@
 	</head>
   <body data-theme="a">
     <div id="wrapper" data-role="page">
+      <div id="toolbar" data-role="header" class="ui-bar ui-bar-a ui-header">
+        <h4>MapSketcher</h4>
+        <a id="toggleModeButton" data-role="button">Switch Mode</a>
+        <a href="#" rel="#collaborativeRoomSelection" data-role="button">Collaborative Room</a>
+        <a href="#" id="newRoom" data-role="button" data-icon="plus" class="ui-btn-right">Personal Room</a>
+      </div>
       <a href="#" id="feedback"></a>
       <div id="workspace" data-role="content">
         <div id="map"></div>
         <div id="sketches"></div>
       </div>
-      <div id="toolbar" data-role="footer" class="ui-bar ui-bar-a ui-footer">
-        <h4>MapSketcher</h4>
-        <a id="toggleModeButton" data-role="button" class="ui-btn-right">switch</a>
-        <a href="#" rel="#collaborativeRoomSelection">Collaborative Room</a>
-      </div>
       <div id="rooms">
-        <div id="newRoom">Add new Personal Room</div>
-        <div class="room" id="personal">
+        <div id="personal">
         </div>
         <div class="room" id="selected">
         </div>
-        <div class="room" id="global">
+        <div class="room" id="globalRoom">
         </div>
       </div>
     </div>

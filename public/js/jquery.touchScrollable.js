@@ -22,7 +22,10 @@
     if (this.lastScroll) {
       var delta = t.pageY - this.lastScroll;
       this.scrolled = this.scrolled + delta;
-      this.style.webkitTransform = "translate(0,"+this.scrolled +"px)"
+
+      if (this.scrolled > 0) this.scrolled = 0;
+
+      $(this).children().css('-webkit-transform', "translate(0,"+ this.scrolled +"px)")
     }
 
     this.lastScroll = t.pageY;

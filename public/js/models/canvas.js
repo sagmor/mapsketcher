@@ -25,7 +25,7 @@ function Canvas(workspace) {
 }
 
 Canvas.prototype.start = function() {
-  this.dom.appendTo('#map');
+  this.dom.prependTo('#map');
 }
 
 Canvas.prototype.stop = function() {
@@ -57,6 +57,6 @@ Canvas.prototype.onDraw = function(event) {
 
   var touch = event.touches[0];
 
-  var position = this.workspace.map.getXYPosition(touch.pageX, touch.pageY);
+  var position = this.workspace.map.getXYPosition(touch.pageX, touch.pageY - 35);
   this.polyline.addPoint(position);
 }

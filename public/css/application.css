@@ -26,18 +26,20 @@ body {
 }
 
 #toolbar {
-  position: absolute;
+  padding-right: 0;
+  padding-left: 0;
+  z-index: 2000;
+}
 
-  bottom: 0;
-  left: 0;
-  right: 30%;
+#toolbar h4 {
+  margin-left: 18px;
 }
 
 #workspace {
   position: absolute;
   background-color: #333333;
-  top: 0;
-  bottom: 35px;
+  top: 35px;
+  bottom: 0;
   left: 0;
   width: 70%;
 }
@@ -56,14 +58,14 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 50;
+  z-index: 200;
   background: rgba(255, 255, 255, 0.5);
 }
 
 #rooms {
   position: absolute;
   background-color: #666666;
-  top: 0;
+  top: 35px;
   bottom: 0;
   right: 0;
   height: 100%;
@@ -76,19 +78,19 @@ body {
   z-index: 10;
 }
 
-#newRoom {
-  height: 8%;
+#personal {
   width: 100%;
-  background-color: white;
-  text-align: center;
-  padding-top: 2%;
+  height: 100%;
+  position: absolute;
+  top: 0;
 }
 
-#personal {
+#selected {
+  margin-top: 35%;
 }
 
 .miniRoom {
-  height: 80%;
+  height: 100px;
   width: 80%;
 }
 
