@@ -11,6 +11,12 @@ jQuery(function() {
 		  color: '#ebecff'
 		, loadSpeed: 200
 		, opacity: 0.9
+    , onLoad: function() {
+        $('#name').focus();
+      }
+    , onClose: function() {
+        $('#workspace').focus();
+      }
     }
   });
 
