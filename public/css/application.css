@@ -73,17 +73,20 @@ body {
 }
 
 #rooms .room {
+  position: relative;
   height: 30%;
   width: 100%;
   z-index: 10;
 }
 
 #personal {
+  position: relative;
   height: 40%;
   width: 100%;
 }
 
 .miniRoom {
+  position: relative;
   height: 100px;
   width: 80%;
 }
@@ -131,3 +134,10 @@ body {
 	-webkit-box-shadow: 0 0 90px #000;  
 }
 
+.map {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}

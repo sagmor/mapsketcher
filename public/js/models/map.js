@@ -45,7 +45,6 @@ function Map(options) {
   // Clean the exesive gmaps credits.
   if (!self.showCredits)
     setTimeout(function() {
-      console.log('cleaning up credits!');
       $('a[target="_blank"]', self.dom).parent().detach();
   }, 800);
 }

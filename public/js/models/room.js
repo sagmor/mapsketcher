@@ -48,8 +48,14 @@ Room.prototype.start = function() {
   }
 
   // Display Map
+  var mapDiv = document.createElement('div');
+  mapDiv.className = "map";
+  mapDiv.room = self;
+
+  $(mapDiv).appendTo(self.dom);
+
   self.map = new Map({
-    dom: self.dom
+    dom: mapDiv
   , controllable: false
   , position:
     { lat: self.currentPosition.lat
@@ -62,11 +68,34 @@ Room.prototype.start = function() {
     self.setActive(true);
   });
 
-  self.drag = new webkit_draggable(self.dom.id, {revert: 'always'});
+  self.drag = new webkit_draggable(mapDiv, 
+    { revert: 'always'
+    , onStart: function() {
+        $(mapDiv).css('z-index', '1000');
+        $('.copy', self.dom).remove();
+        $(mapDiv).clone().addClass('copy').css('z-index', '1').appendTo(self.dom);
+      }
+    , onEnd: function() {
+        $('.copy', self.dom).remove();
+        $(mapDiv).css('z-index', '5');
+      }
+    });
+
   self.dom.room = self;
-  self.drop = webkit_drop.add(self.dom.id, {onDrop: function(dragable) {
-    self.copySketches(dragable.room);
-  }});
+  self.drop = webkit_drop.add(mapDiv,
+    { onDrop: function(dragable) {
+      self.copySketches(dragable.room);
+      }
+    , onOver: function() {
+        self.dom.style.border = "3px solid green";
+      }
+    , onOut: function() {
+        if(self.client.activeRoom == self)
+          self.dom.style.border = "3px solid red";
+        else
+          self.dom.style.border = "";
+      }
+    });
 }
 
 Room.prototype.copySketches = function(room) {
