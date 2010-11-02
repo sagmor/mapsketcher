@@ -27,6 +27,23 @@ jQuery(function() {
     return e.preventDefault();
   });
 
+  $(function() {  
+    $("#collaborativeRoomSelection form input").keypress(function (e) {  
+        if ((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13)) {  
+           $('#collaborativeRoomSelection form').submit();
+            return false;  
+        } else {  
+            return true;  
+        }  
+    });  
+  });
+  
+
+
    $('#feedback').githubVoice('sagmor', 'mapsketcher');
    $('#personal').touchScrollable();
+
+
+
+
 });
